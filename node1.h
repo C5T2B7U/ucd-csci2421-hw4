@@ -1,3 +1,11 @@
+// BRIAN SUMNER
+// xxxxx6936
+// CSCI 2421-E01
+// SPRING 2016
+// HW4: 6936HW4->node1.h
+
+
+
 // FILE: node1.h
 // PROVIDES: A class for a node in a linked list, and list manipulation
 // functions, all within the namespace main_savitch_5

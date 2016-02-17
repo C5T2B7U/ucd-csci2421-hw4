@@ -1,3 +1,11 @@
+// BRIAN SUMNER
+// xxxxx6936
+// CSCI 2421-E01
+// SPRING 2016
+// HW4: 6936HW4->node1.cpp
+
+
+
 // FILE: node1.cxx
 // IMPLEMENTS: The functions of the node class and the
 // linked list toolkit (see node1.h for documentation).
