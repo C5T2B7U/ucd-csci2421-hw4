@@ -39,11 +39,11 @@ Just in case, here's a detailed description of the insertion sort algorithm and
 
 http://www.algolist.net/Algorithms/Sorting/Insertion_sort
 
-		The input text file may have sentences with punctuation marks. But to
-		simplify the issue, let's assume that the text file will have only five
-		punctuation marks . , ' - ? . So when you assign a string to a node,
-		you need to get rid of those five punctuation marks and store only the
-		word itself.
+The input text file may have sentences with punctuation marks. But to
+ simplify the issue, let's assume that the text file will have only five
+ punctuation marks . , ' - ? . So when you assign a string to a node,
+ you need to get rid of those five punctuation marks and store only the
+ word itself.
 
 Note that the main objective of this homework is to reinforce the
  understanding of linked list by implementing pertinent functions, not getting
@@ -71,6 +71,10 @@ void list_piece(const node* start_ptr, const node* end_ptr,
 // including end_ptr.  The end_ptr may also be NULL, in which case the
 // new list contains elements from start_ptr to the end of the list.
 */
+
+
+
+// NOTE: INCLUDE CSTDLIB AND USE "NULL" INSTEAD OF NULLPTR
 
 
 

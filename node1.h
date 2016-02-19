@@ -132,6 +132,8 @@
 #ifndef MAIN_SAVITCH_NODE1_H  
 #define MAIN_SAVITCH_NODE1_H
 #include <cstdlib> // Provides size_t and NULL
+#include <string> // INCLUDE LIBRARY
+
 
 namespace main_savitch_5
 {
@@ -139,7 +141,8 @@ namespace main_savitch_5
     {
     public:
 	// TYPEDEF
-	typedef double value_type;
+//	typedef double value_type;
+	typedef std::string value_type;
     
 	// CONSTRUCTOR
 	node(
