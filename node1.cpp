@@ -118,10 +118,10 @@ namespace main_savitch_5
     {
 		while (head_ptr != NULL)
 		{
-/*DEBUG*/	std::cout << "[LENGTH = " << list_length(head_ptr) << "      REMOVING HEAD]\n";
+///*DEBUG*/	std::cout << "[LENGTH = " << list_length(head_ptr) << "      REMOVING HEAD]\n";
 			list_head_remove(head_ptr);
 		}
-/*DEBUG*/	std::cout << "[LIST CLEARED]\n";
+///*DEBUG*/	std::cout << "[LIST CLEARED]\n";
 	}
 
     void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr) 
@@ -148,5 +148,17 @@ namespace main_savitch_5
 		}
     }
 
+
+	ostream &operator<<(ostream &outs, const node* arg_ptr_headNode)
+	{
+		const node* cursor;
+
+		for (cursor = arg_ptr_headNode; cursor != NULL; cursor = cursor->link( ))
+		{
+			outs << cursor->data() << "\n";
+		}
+
+		return outs;
+	}
 // END NAMESPACE
 }

@@ -113,8 +113,6 @@ int main()
 		inputFileName = "data.txt";
 	}
 
-///*DEBUG*/	std::cout << inputFileName << "\n";
-
 	// OPEN INPUTFILE
 	inputFile.open(inputFileName.c_str());
 
@@ -127,9 +125,9 @@ int main()
 		ptr_headNode = new node();
 //		list_head_insert(ptr_headNode);
 
-		ptr_tailNode = processFile_return_tailPtr(inputFile, ptr_headNode);
+		ptr_tailNode = processFile_return_ptr_tailNode(inputFile, ptr_headNode);
 
-
+		std::cout << ptr_headNode;
 
 
 
@@ -140,7 +138,7 @@ int main()
 		// CLOSE INPUT FILE
 		inputFile.close();
 
-/*DEBUG*/	std::cout << "[BEGIN DEALLOCATION]\n";
+///*DEBUG*/	std::cout << "[BEGIN DEALLOCATION]\n";
 
 		// DEALLOCATION
 		list_clear(ptr_headNode);
@@ -159,14 +157,13 @@ int main()
 		// DEALLOCATION
 		list_clear(ptr_headNode);
 		delete ptr_headNode;
-		delete ptr_tailNode;
 
 		// RETURN ERROR
 		std::cout << "[FATAL ERROR: 13 (UNABLE TO OPEN INPUT FILE)]\n";
 		return 13;
 	}
 
-/*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
+///*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
 	// RETURN NORMAL
 	return 0;
 }

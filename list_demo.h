@@ -18,7 +18,7 @@ using namespace main_savitch_5;
 namespace list_demo
 {
 
-	node* processFile_return_tailPtr(std::ifstream &arg_inputFile, node* &arg_ptr_headNode);
+	node*processFile_return_ptr_tailNode(std::ifstream &arg_inputFile, node *&arg_ptr_headNode);
 
 
 
