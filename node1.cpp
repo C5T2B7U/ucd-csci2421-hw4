@@ -54,7 +54,7 @@ namespace main_savitch_5
 
 		for (cursor = head_ptr; cursor != NULL; cursor = cursor->link( ))
 			if (target == cursor->data( ))
-			return cursor;
+				return cursor;
 		return NULL;
     }
 
@@ -65,7 +65,7 @@ namespace main_savitch_5
 
 		for (cursor = head_ptr; cursor != NULL; cursor = cursor->link( ))
 			if (target == cursor->data( ))
-			return cursor;
+				return cursor;
 		return NULL;
     }
 
@@ -163,21 +163,88 @@ namespace main_savitch_5
 
 
 
-//	Then ask the user to pick two
-//	words, one for the starting and one for the ending word. And search the
-//	original list to find a new sub-list that contains the items, as a starting
-//	and ending node, and print out the new list. When you print, include the last
-//	word. The list_piece() funciton's post condition in the textbook says the
-//	node pointed by the end_ptr should be excluded. So you have to implement the
-//	list_piece() to include the last word as well. If there's no such sub-list,
-//	just print out an error message.
-//
+	//	Then ask the user to pick two
+	//	words, one for the starting and one for the ending word. And search the
+	//	original list to find a new sub-list that contains the items, as a starting
+	//	and ending node, and print out the new list. When you print, include the last
+	//	word. The list_piece() function's post condition in the textbook says the
+	//	node pointed by the end_ptr should be excluded. So you have to implement the
+	//	list_piece() to include the last word as well. If there's no such sub-list,
+	//	just print out an error message.
+	//
+
+	// Precondition: start_ptr and end_ptr are pointers to nodes on the same
+	// linked list, with the start_ptr node at or before the end_ptr node.
+	// Postcondition: head_ptr and tail_ptr are the head and tail pointers
+	// for a new list that contains the items from start_ptr up to but not
+	// including end_ptr.  The end_ptr may also be NULL, in which case the
+	// new list contains elements from start_ptr to the end of the list.
+
 	void list_piece(const node* start_ptr, const node* end_ptr,
 					node*& head_ptr, node*& tail_ptr)
 	{
+		const node* inputCursor;
 
+		node* outputCursor;
+			  outputCursor = head_ptr;
+
+		node::value_type endData;
+
+		bool encounteredEndData;
+			 encounteredEndData = false;
+
+		// SET ENDDATA TO VALID VALUE OR SENTINEL
+		if (end_ptr != NULL)
+			endData = end_ptr->data();
+		else
+			endData = "<<<>>>";
+
+
+		for (inputCursor = start_ptr;
+			 inputCursor != NULL && !encounteredEndData;
+			 inputCursor = inputCursor->link())
+		{
+			// INSERT CURRENT DATA INTO NEW SUBLIST NODE
+			list_insert(outputCursor, inputCursor->data());
+			outputCursor = outputCursor->link();
+
+			// IF ENDDATA ENCOUNTERED THEN SET FLAG
+			if (outputCursor->data() == endData)
+			{
+///*DEBUG*/    std::cout << "ENDING LOOP\n";
+				encounteredEndData = true;
+			}
+
+		}
+
+	//	list_copy(start_ptr, head_ptr, tail_ptr);
 	}
 
+
+	bool isNodeBefore(const node* searchResultStartWord, const node* searchResultEndWord)
+	{
+		const node* cursor;
+
+		if (searchResultEndWord != NULL)
+		{
+
+			if (searchResultStartWord == searchResultEndWord)
+				return true;
+
+
+			node::value_type endWord;
+			endWord = searchResultEndWord->data();
+
+
+			for (cursor = searchResultStartWord;
+				 cursor != NULL;
+				 cursor = cursor->link())
+					if (cursor->data() == endWord)
+						return true;
+		}
+
+	return false;
+	}
 
 // END NAMESPACE
 }

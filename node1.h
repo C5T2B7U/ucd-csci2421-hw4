@@ -113,6 +113,7 @@
 //     Postcondition: head_ptr and tail_ptr are the head and tail pointers for
 //     a new list that contains the same items as the list pointed to by
 //     source_ptr. The original list is unaltered.
+//
 //  void list_piece(
 //    const node* start_ptr, const node* end_ptr, 
 //    node*& head_ptr, node*& tail_ptr
@@ -189,6 +190,8 @@ namespace main_savitch_5
 
 	void list_piece(const node* start_ptr, const node* end_ptr,
 					node*& head_ptr, node*& tail_ptr);
+
+	bool isNodeBefore(const node* searchResultStartWord, const node* searchResultEndWord);
 }
 
 #endif

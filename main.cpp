@@ -100,9 +100,12 @@ int main()
 	std::ifstream inputFile;
 	node* ptr_headNode = NULL;
 	node* ptr_tailNode = NULL;
-	node* ptr_sublistHeadNode = NULL;
-	node* ptr_sublistTailNode = NULL;
+	node* ptr_sublistHeadNode;
+	node* ptr_sublistTailNode;
 
+// DUH, DON'T DO THIS AGAIN
+//	ptr_sublistHeadNode = NULL;
+	ptr_sublistTailNode = NULL;
 
 	// PROMPT INPUTFILENAME
 	std::cout << "ENTER INPUTFILENAME OR * FOR data.txt \n>  ";
@@ -135,10 +138,13 @@ int main()
 		generateSublist(ptr_headNode, ptr_tailNode,
 						ptr_sublistHeadNode, ptr_sublistTailNode);
 
+
 /*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
 
 
+///*DEBUG*/ 	list_insert(ptr_sublistHeadNode, "SUBLIST NODE INSERTED"); std::cout << ptr_sublistHeadNode;
 
+/*DEBUG*/	if (ptr_headNode == ptr_sublistHeadNode) std::cout << "[IDENTICAL POINTER]\n";
 
 
 		// CLOSE INPUT FILE
@@ -165,11 +171,11 @@ int main()
 		inputFile.close();
 
 		// DEALLOCATION
-		list_clear(ptr_headNode);
-		delete ptr_headNode;
-
-		list_clear(ptr_sublistHeadNode);
-		delete ptr_sublistHeadNode;
+//		list_clear(ptr_headNode);
+//		delete ptr_headNode;
+//
+//		list_clear(ptr_sublistHeadNode);
+//	delete ptr_sublistHeadNode;
 
 
 		// RETURN ERROR

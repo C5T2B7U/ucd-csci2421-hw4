@@ -100,12 +100,19 @@ namespace list_demo
 //	Then ask the user to pick two words, one for the starting and one for the
 //	ending word. And search the original list to find a new sub-list that
 //	contains the items, as a starting and ending node, and print out the new
-//	list. When you print, include the last word.
+//	list. When you print, include the last word.  If there's no such sub-list,
+//  just print out an error message.
 	void generateSublist(node* &arg_ptr_headNode, node* &arg_ptr_tailNode,
 						 node* &arg_ptr_sublistHeadNode, node* &arg_ptr_sublistTailNode)
 	{
 		// DECLARATIONS
 		node::value_type startWord, endWord;
+		node* ptr_searchResultStartWord;
+		node* ptr_searchResultEndWord;
+
+//		ptr_searchResultEndWord = NULL;
+//		ptr_searchResultStartWord = NULL;
+
 
 		// PROMPT STARTING WORD
 		std::cout << "PLEASE ENTER START WORD>  ";
@@ -116,8 +123,49 @@ namespace list_demo
 
 		std::cout << "GENERATING SUBLIST: " << startWord << " TO " << endWord << "\n";
 
-		list_piece(arg_ptr_headNode, arg_ptr_tailNode,
-				   arg_ptr_sublistHeadNode, arg_ptr_sublistTailNode);
+
+		// SEARCH START NODE
+		ptr_searchResultStartWord = list_search(arg_ptr_headNode, startWord);
+
+///*DEBUG*/	if (ptr_searchResultStartWord != NULL) std::cout << "FOUND START WORD -> " << ptr_searchResultStartWord->data() << "\n";
+
+
+		// SEARCH END NODE
+		ptr_searchResultEndWord = list_search(arg_ptr_headNode, endWord);
+
+///*DEBUG*/	if (ptr_searchResultEndWord != NULL) std::cout << "FOUND END WORD -> " << ptr_searchResultEndWord->data() << "\n";
+
+
+		// SUBLIST POINTERS WERE INITIALIZED WITH NULL
+		// HEAD == NULL MEANS START WORD NOT FOUND OR EMPTY LIST
+		// TAIL == NULL MEANS END WORD NOT FOUND
+		if (ptr_searchResultStartWord != NULL &&
+				isNodeBefore(ptr_searchResultStartWord, ptr_searchResultEndWord))
+		{
+
+	//		list_insert(arg_ptr_sublistHeadNode, ptr_searchResultStartWord->data());
+	//		arg_ptr_sublistHeadNode->set_data(ptr_searchResultStartWord->data());
+	//		arg_ptr_sublistHeadNode->set_link(ptr_searchResultStartWord->link());
+
+
+
+			list_piece(ptr_searchResultStartWord, ptr_searchResultEndWord,
+					   arg_ptr_sublistHeadNode, arg_ptr_sublistTailNode);
+///*DEBUG*/	std::cout << "FOUND START WORD -> " << arg_ptr_sublistHeadNode->data() ;
+
+
+		}
+		else if (ptr_searchResultStartWord == NULL)
+		{
+			// DISPLAY ERROR
+			std::cout << "ERROR: CANNOT GENERATE SUBLIST (START WORD NOT FOUND)\n";
+		}
+		else
+		{
+			std::cout << "ERROR: CANNOT GENERATE SUBLIST (END WORD DOES NOT FOLLOW START WORD)\n";
+		}
+
+
 	}
 
 
