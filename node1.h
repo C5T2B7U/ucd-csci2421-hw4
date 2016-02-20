@@ -186,6 +186,9 @@ namespace main_savitch_5
     void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr);
 
 	std::ostream &operator<<(std::ostream &outs, const node* arg_ptr_headNode);
+
+	void list_piece(const node* start_ptr, const node* end_ptr,
+					node*& head_ptr, node*& tail_ptr);
 }
 
 #endif

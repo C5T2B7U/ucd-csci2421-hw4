@@ -20,7 +20,7 @@ using namespace main_savitch_5;
 namespace list_demo
 {
 
-	node*processFile_return_ptr_tailNode(std::ifstream &arg_inputFile, node *&arg_ptr_headNode)
+	void processFile(std::ifstream &arg_inputFile, node* &arg_ptr_headNode, node* &arg_ptr_tailNode)
 	{
 		// DECLARATIONS
 		std::string line, buffer;
@@ -91,7 +91,7 @@ namespace list_demo
 
 	// RETURN TAIL POINTER
 	// IF NOT FILE OPEN OR EMPTY LIST THEN RETURN HEAD POINTER
-	return cursor;
+	arg_ptr_tailNode = cursor;
 	}
 
 
@@ -101,7 +101,24 @@ namespace list_demo
 //	ending word. And search the original list to find a new sub-list that
 //	contains the items, as a starting and ending node, and print out the new
 //	list. When you print, include the last word.
+	void generateSublist(node* &arg_ptr_headNode, node* &arg_ptr_tailNode,
+						 node* &arg_ptr_sublistHeadNode, node* &arg_ptr_sublistTailNode)
+	{
+		// DECLARATIONS
+		node::value_type startWord, endWord;
 
+		// PROMPT STARTING WORD
+		std::cout << "PLEASE ENTER START WORD>  ";
+		std::cin >> startWord;
+
+		std::cout << "PLEASE ENTER END WORD>  ";
+		std::cin >> endWord;
+
+		std::cout << "GENERATING SUBLIST: " << startWord << " TO " << endWord << "\n";
+
+		list_piece(arg_ptr_headNode, arg_ptr_tailNode,
+				   arg_ptr_sublistHeadNode, arg_ptr_sublistTailNode);
+	}
 
 
 

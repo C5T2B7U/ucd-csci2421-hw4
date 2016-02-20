@@ -18,10 +18,10 @@ using namespace main_savitch_5;
 namespace list_demo
 {
 
-	node*processFile_return_ptr_tailNode(std::ifstream &arg_inputFile, node *&arg_ptr_headNode);
+	void processFile(std::ifstream &arg_inputFile, node* &arg_ptr_headNode, node* &arg_ptr_tailNode);
 
-
-
+	void generateSublist(node* &arg_ptr_headNode, node* &arg_ptr_tailNode,
+						 node* &arg_ptr_sublistHeadNode, node* &arg_ptr_sublistTailNode);
 
 
 
