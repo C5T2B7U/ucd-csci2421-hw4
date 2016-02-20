@@ -5,6 +5,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES main.cpp
     node1.cpp
-    node1.h)
+    node1.h list_demo.h list_demo.cpp)
 
 add_executable(ucd_csci2421_hw4 ${SOURCE_FILES})

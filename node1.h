@@ -145,11 +145,13 @@ namespace main_savitch_5
 	typedef std::string value_type;
     
 	// CONSTRUCTOR
-	node(
-	    const value_type& init_data = value_type( ),
-	    node* init_link = NULL
-	)
+	node(const value_type& init_data = value_type(),
+		 			 node* init_link = NULL
+		)
 	{ data_field = init_data; link_field = init_link; }
+
+	~node() {}
+
 
 	// Member functions to set the data and link fields:
     	void set_data(const value_type& new_data) { data_field = new_data; }
@@ -161,7 +163,7 @@ namespace main_savitch_5
 	// Two slightly different member functions to retreive
 	// the current link:
 	const node* link( ) const { return link_field; }
-    	node* link( )             { return link_field; }
+    	  node* link( )             { return link_field; }
 	
     private:
 	value_type data_field;
@@ -170,7 +172,7 @@ namespace main_savitch_5
 
     // FUNCTIONS for the linked list toolkit
     std::size_t list_length(const node* head_ptr);
-    void list_head_insert(node*& head_ptr, const node::value_type& entry); 
+    void list_head_insert(node*& head_ptr, const node::value_type& entry = NULL);
     void list_insert(node* previous_ptr, const node::value_type& entry);  
     node* list_search(node* head_ptr, const node::value_type& target);
     const node* list_search

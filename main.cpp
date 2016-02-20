@@ -79,11 +79,15 @@ void list_piece(const node* start_ptr, const node* end_ptr,
 
 
 #include <iostream>
+#include <string> // FOR FILENAME
+#include <fstream> // FOR FILE
 
 
 #include "node1.h"
 using namespace main_savitch_5;
 
+#include "list_demo.h"
+using namespace list_demo;
 
 
 
@@ -92,8 +96,77 @@ int main()
 	// CONSTANTS
 
 	// DECLARATIONS
+	std::string inputFileName;
+	std::ifstream inputFile;
+	node* ptr_headNode;
+	node* ptr_tailNode;
 
 
-	// RETURN
+	// PROMPT INPUTFILENAME
+	std::cout << "ENTER INPUTFILENAME OR * FOR data.txt \n>  ";
+	std::cin >> inputFileName;
+
+
+	// TEST ASTERISK
+	if (inputFileName == "*")
+	{
+		inputFileName = "data.txt";
+	}
+
+///*DEBUG*/	std::cout << inputFileName << "\n";
+
+	// OPEN INPUTFILE
+	inputFile.open(inputFileName.c_str());
+
+
+	// TEST INPUTFILE OPEN
+	if (!inputFile.fail())
+	{
+
+		// ALLOCATE HEAD NODE
+		ptr_headNode = new node();
+//		list_head_insert(ptr_headNode);
+
+		ptr_tailNode = processFile_return_tailPtr(inputFile, ptr_headNode);
+
+
+
+
+
+
+
+
+
+		// CLOSE INPUT FILE
+		inputFile.close();
+
+/*DEBUG*/	std::cout << "[BEGIN DEALLOCATION]\n";
+
+		// DEALLOCATION
+		list_clear(ptr_headNode);
+		// TAIL NODE WAS JUST DELETED, DISREGARD DELETE TAIL NODE
+		//	delete ptr_tailNode;
+		delete ptr_headNode;
+
+
+	}
+	// ELSE
+	else
+	{
+		// CLOSE INPUT FILE
+		inputFile.close();
+
+		// DEALLOCATION
+		list_clear(ptr_headNode);
+		delete ptr_headNode;
+		delete ptr_tailNode;
+
+		// RETURN ERROR
+		std::cout << "[FATAL ERROR: 13 (UNABLE TO OPEN INPUT FILE)]\n";
+		return 13;
+	}
+
+/*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
+	// RETURN NORMAL
 	return 0;
 }
