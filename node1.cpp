@@ -118,10 +118,10 @@ namespace main_savitch_5
     {
 		while (head_ptr != NULL)
 		{
-/*DEBUG*/	std::cout << "[LENGTH = " << list_length(head_ptr) << "      REMOVING HEAD]\n";
+///*DEBUG*/	std::cout << "[LENGTH = " << list_length(head_ptr) << "      REMOVING HEAD]\n";
 			list_head_remove(head_ptr);
 		}
-/*DEBUG*/	std::cout << "[LIST CLEARED]\n";
+///*DEBUG*/	std::cout << "[LIST CLEARED]\n";
 	}
 
     void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr) 
@@ -147,6 +147,37 @@ namespace main_savitch_5
 			source_ptr = source_ptr->link( );
 		}
     }
+
+
+	ostream &operator<<(ostream &outs, const node* arg_ptr_headNode)
+	{
+		const node* cursor;
+
+		for (cursor = arg_ptr_headNode; cursor != NULL; cursor = cursor->link( ))
+		{
+			outs << cursor->data() << "\n";
+		}
+
+		return outs;
+	}
+
+
+
+//	Then ask the user to pick two
+//	words, one for the starting and one for the ending word. And search the
+//	original list to find a new sub-list that contains the items, as a starting
+//	and ending node, and print out the new list. When you print, include the last
+//	word. The list_piece() funciton's post condition in the textbook says the
+//	node pointed by the end_ptr should be excluded. So you have to implement the
+//	list_piece() to include the last word as well. If there's no such sub-list,
+//	just print out an error message.
+//
+	void list_piece(const node* start_ptr, const node* end_ptr,
+					node*& head_ptr, node*& tail_ptr)
+	{
+		
+	}
+
 
 // END NAMESPACE
 }

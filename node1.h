@@ -131,6 +131,7 @@
 
 #ifndef MAIN_SAVITCH_NODE1_H  
 #define MAIN_SAVITCH_NODE1_H
+#include <iostream>
 #include <cstdlib> // Provides size_t and NULL
 #include <string> // INCLUDE LIBRARY
 
@@ -183,6 +184,11 @@ namespace main_savitch_5
     void list_remove(node* previous_ptr);
     void list_clear(node*& head_ptr);
     void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr);
+
+	std::ostream &operator<<(std::ostream &outs, const node* arg_ptr_headNode);
+
+	void list_piece(const node* start_ptr, const node* end_ptr,
+					node*& head_ptr, node*& tail_ptr);
 }
 
 #endif

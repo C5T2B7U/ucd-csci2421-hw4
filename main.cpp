@@ -98,8 +98,10 @@ int main()
 	// DECLARATIONS
 	std::string inputFileName;
 	std::ifstream inputFile;
-	node* ptr_headNode;
-	node* ptr_tailNode;
+	node* ptr_headNode = NULL;
+	node* ptr_tailNode = NULL;
+	node* ptr_sublistHeadNode = NULL;
+	node* ptr_sublistTailNode = NULL;
 
 
 	// PROMPT INPUTFILENAME
@@ -113,8 +115,6 @@ int main()
 		inputFileName = "data.txt";
 	}
 
-///*DEBUG*/	std::cout << inputFileName << "\n";
-
 	// OPEN INPUTFILE
 	inputFile.open(inputFileName.c_str());
 
@@ -123,15 +123,19 @@ int main()
 	if (!inputFile.fail())
 	{
 
-		// ALLOCATE HEAD NODE
+		// ALLOCATE HEAD NODES
 		ptr_headNode = new node();
-//		list_head_insert(ptr_headNode);
-
-		ptr_tailNode = processFile_return_tailPtr(inputFile, ptr_headNode);
+		ptr_sublistHeadNode = new node();
 
 
+		processFile(inputFile, ptr_headNode, ptr_tailNode);
 
+/*DEBUG*/ 	std::cout << ptr_headNode;
 
+		generateSublist(ptr_headNode, ptr_tailNode,
+						ptr_sublistHeadNode, ptr_sublistTailNode);
+
+/*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
 
 
 
@@ -140,13 +144,17 @@ int main()
 		// CLOSE INPUT FILE
 		inputFile.close();
 
-/*DEBUG*/	std::cout << "[BEGIN DEALLOCATION]\n";
+///*DEBUG*/	std::cout << "[BEGIN DEALLOCATION]\n";
 
 		// DEALLOCATION
 		list_clear(ptr_headNode);
 		// TAIL NODE WAS JUST DELETED, DISREGARD DELETE TAIL NODE
 		//	delete ptr_tailNode;
 		delete ptr_headNode;
+
+		list_clear(ptr_sublistHeadNode);
+		delete ptr_sublistHeadNode;
+
 
 
 	}
@@ -159,14 +167,17 @@ int main()
 		// DEALLOCATION
 		list_clear(ptr_headNode);
 		delete ptr_headNode;
-		delete ptr_tailNode;
+
+		list_clear(ptr_sublistHeadNode);
+		delete ptr_sublistHeadNode;
+
 
 		// RETURN ERROR
 		std::cout << "[FATAL ERROR: 13 (UNABLE TO OPEN INPUT FILE)]\n";
 		return 13;
 	}
 
-/*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
+///*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
 	// RETURN NORMAL
 	return 0;
 }

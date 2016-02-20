@@ -10,7 +10,6 @@
 #include <cstdlib> // Provides size_t and NULL
 #include <string> // STRING TYPE
 #include <fstream> // FOR FILE
-//#include <sstream> // FOR STRINGSTREAM
 #include <cctype> // FOR ISSPACE, ISPUNCT
 
 #include "list_demo.h"
@@ -21,7 +20,7 @@ using namespace main_savitch_5;
 namespace list_demo
 {
 
-	node* processFile_return_tailPtr(std::ifstream &arg_inputFile, node* &arg_ptr_headNode)
+	void processFile(std::ifstream &arg_inputFile, node* &arg_ptr_headNode, node* &arg_ptr_tailNode)
 	{
 		// DECLARATIONS
 		std::string line, buffer;
@@ -41,7 +40,7 @@ namespace list_demo
 			// GUARANTEE LAST WORD INSERTED INTO LIST
 			line += " ";
 
-/*DEBUG*/	std::cout << line << "\n";
+///*DEBUG*/	std::cout << line << "\n";
 
 			/*The input text file may have sentences with punctuation marks. But to
 			simplify the issue, let's assume that the text file will have only five
@@ -50,7 +49,7 @@ namespace list_demo
 			word itself.*/
 
 			// TEST EACH CHARACTER
-			while (index < line.length() + 1)
+			while (index < line.length())
 			{
 				// IF NOT ISPUNCT LINE[INDEX] AND NOT ISSPACE LINE[INDEX]
 				if (!std::isspace(line[index]) && !std::ispunct(line[index]))
@@ -62,7 +61,7 @@ namespace list_demo
 				else if (buffer != "")
 				{
 
-/*DEBUG*/	std::cout << "[INDEX = " << index << "   LENGTH = " << line.length() << "   NODES = " << list_length(arg_ptr_headNode) << "   INSERTING BUFFER = " << buffer << "]\n";
+///*DEBUG*/	std::cout << "[INDEX = " << index << "   LENGTH = " << line.length() << "   NODES = " << list_length(arg_ptr_headNode) << "   INSERTING BUFFER = " << buffer << "]\n";
 
 					// INSERT NEW NODE WITH BUFFER
 					list_insert(cursor, buffer);
@@ -92,14 +91,34 @@ namespace list_demo
 
 	// RETURN TAIL POINTER
 	// IF NOT FILE OPEN OR EMPTY LIST THEN RETURN HEAD POINTER
-	return cursor;
+	arg_ptr_tailNode = cursor;
 	}
 
-//	node*
 
 
 
+//	Then ask the user to pick two words, one for the starting and one for the
+//	ending word. And search the original list to find a new sub-list that
+//	contains the items, as a starting and ending node, and print out the new
+//	list. When you print, include the last word.
+	void generateSublist(node* &arg_ptr_headNode, node* &arg_ptr_tailNode,
+						 node* &arg_ptr_sublistHeadNode, node* &arg_ptr_sublistTailNode)
+	{
+		// DECLARATIONS
+		node::value_type startWord, endWord;
 
+		// PROMPT STARTING WORD
+		std::cout << "PLEASE ENTER START WORD>  ";
+		std::cin >> startWord;
+
+		std::cout << "PLEASE ENTER END WORD>  ";
+		std::cin >> endWord;
+
+		std::cout << "GENERATING SUBLIST: " << startWord << " TO " << endWord << "\n";
+
+		list_piece(arg_ptr_headNode, arg_ptr_tailNode,
+				   arg_ptr_sublistHeadNode, arg_ptr_sublistTailNode);
+	}
 
 
 
