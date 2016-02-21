@@ -191,7 +191,9 @@ namespace main_savitch_5
 	void list_piece(const node* start_ptr, const node* end_ptr,
 					node*& head_ptr, node*& tail_ptr);
 
-	bool isNodeBefore(const node* searchResultStartWord, const node* searchResultEndWord);
+	bool isStartWordBeforeEndWord(const node *searchResultStartWord, const node *searchResultEndWord);
+
+	void list_sort(node* &arg_ptr_headNode);
 }
 
 #endif

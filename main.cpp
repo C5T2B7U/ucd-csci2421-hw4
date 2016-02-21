@@ -130,22 +130,28 @@ int main()
 		ptr_headNode = new node();
 		ptr_sublistHeadNode = new node();
 
+/*DEBUG*/	std::cout << "\nPROCESSING FILE NOW: \n";
 
 		processFile(inputFile, ptr_headNode, ptr_tailNode);
 
 /*DEBUG*/ 	std::cout << ptr_headNode;
 
+
+/*DEBUG*/	std::cout << "\nFILE PROCESSING COMPLETE. \n";
+
+
 		generateSublist(ptr_headNode, ptr_tailNode,
 						ptr_sublistHeadNode, ptr_sublistTailNode);
 
+/*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
+
+		list_sort(ptr_sublistHeadNode);
+
+/*DEBUG*/	std::cout << "\nSORTING SUBLIST NOW: \n";
 
 /*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
 
-
-///*DEBUG*/ 	list_insert(ptr_sublistHeadNode, "SUBLIST NODE INSERTED"); std::cout << ptr_sublistHeadNode;
-
-/*DEBUG*/	if (ptr_headNode == ptr_sublistHeadNode) std::cout << "[IDENTICAL POINTER]\n";
-
+/*DEBUG*/	std::cout << "\nTASK COMPLETE.\n";
 
 		// CLOSE INPUT FILE
 		inputFile.close();

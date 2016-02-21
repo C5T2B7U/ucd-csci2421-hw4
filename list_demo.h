@@ -23,9 +23,6 @@ namespace list_demo
 	void generateSublist(node* &arg_ptr_headNode, node* &arg_ptr_tailNode,
 						 node* &arg_ptr_sublistHeadNode, node* &arg_ptr_sublistTailNode);
 
-
-
-
 };
 
 

@@ -221,7 +221,7 @@ namespace main_savitch_5
 	}
 
 
-	bool isNodeBefore(const node* searchResultStartWord, const node* searchResultEndWord)
+	bool isStartWordBeforeEndWord(const node *searchResultStartWord, const node *searchResultEndWord)
 	{
 		const node* cursor;
 
@@ -246,5 +246,200 @@ namespace main_savitch_5
 	return false;
 	}
 
-// END NAMESPACE
+
+
+	void list_sort(node* &arg_ptr_headNode)
+	{
+		// THIS ALGORITHM WAS DEVELOPED BY TRACING THROUGH LISTS MADE OF PAPER
+		// CARDS ARRANGED ON THE LIVING ROOM FLOOR.  IF YOU ARE HAVING TROUBLE
+		// DEBUGGING THIS FUNCTION, AND YOU'RE NOT TRACING THROUGH LISTS MADE
+		// OF PAPER CARDS, THEN YOU'RE NOT TRYING HARD ENOUGH.  NOW WITHOUT
+		// FURTHER ADO, BRIAN SUMNER'S LINKED LIST INSERTION SORT ALGORITHM:
+
+		// DECLARATIONS
+			// NODE POINTER CURSOR
+				// NODE POINTER NEXTC
+				// NODE POINTER PREVC
+			// NODE POINTER MINICURSOR
+				// NODE POINTER PREVM
+
+		// CURSOR = ARG_PTR_HEAD
+		// NEXTC = CURSOR->LINK
+		// WHILE (NEXTC !== NULL)
+			// CURSOR = NEXTC
+			// NEXTC = CURSOR->LINK
+			// IF (NEXTC != NULL) THEN
+				// IF (CURSOR->DATA > NEXTC->DATA) THEN
+					// PREVM = ARG_PTR_HEAD
+					// MINI = PREVM->LINK
+					// WHILE (MINI != NEXTC || CURSOR->DATA > NEXTC->DATA)
+						// IF (MINI == NEXTC) THEN
+							// PREVM = ARG_PTR_HEAD
+							// MINI = PREVM->LINK
+						// ENDIF
+						// IF (MINI->DATA > NEXTC->DATA) THEN
+							// CURSOR->SET_LINK(NEXTC->LINK)
+							// PREVM->SET_LINK(NEXTC)
+							// NEXTC->SET_LINK(MINI)
+							// NEXTC = CURSOR->LINK
+							// MINI = NEXTC
+						// ELSE
+							// PREVM = MINI
+							// MINI = PREVM->LINK
+						// ENDIF
+					// ENDWHILE
+				// ENDIF
+			// ENDIF
+		// ENDWHILE
+
+
+
+		// DECLARATIONS
+		// NODE POINTER CURSOR
+		// NODE POINTER NEXTC
+		// NODE POINTER MINICURSOR
+		// NODE POINTER PREVM
+		node* cursor = NULL;
+		node* nextc = NULL;
+		node* minicursor = NULL;
+		node* prevm = NULL;
+
+///*DEBUG*/	std::cout << arg_ptr_headNode;
+
+		// CURSOR = ARG_PTR_HEAD
+		cursor = arg_ptr_headNode;
+
+		// NEXTC = CURSOR->LINK
+		nextc = cursor->link();
+
+		// WHILE (NEXTC !== NULL)
+		while (nextc != NULL)
+		{
+
+///*DEBUG*/	std::cout << arg_ptr_headNode;
+
+			// CURSOR = NEXTC
+			cursor = nextc;
+
+			// NEXTC = CURSOR->LINK
+			nextc = cursor->link();
+
+			// IF (NEXTC != NULL) THEN
+			if (nextc != NULL)
+			{
+
+///*DEBUG*/	std::cout << "NEXTC NOT NULL\n";
+
+				// IF (CURSOR->DATA > NEXTC->DATA) THEN
+				if (cursor->data() > nextc->data())
+				{
+
+///*DEBUG*/	std::cout << cursor->data() << " > " << nextc->data() << arg_ptr_headNode;
+
+
+					// PREVM = ARG_PTR_HEAD
+					prevm = arg_ptr_headNode;
+
+///*DEBUG*/	std::cout << "AFTER CRASH\n";
+///*DEBUG*/	std::cout << "PREVM LINK = " <<  prevm->link()->data() << "\n";
+
+					// MINI = PREVM->LINK
+					minicursor = prevm->link();
+
+///*DEBUG*/	std::cout << "PREVM LINK = " <<  prevm->link()->data() << "\n";
+///*DEBUG*/	std::cout << "MINICURSOR = " <<  minicursor->data() << "\n";
+
+///*DEBUG*/	std::cout << "BEFORE CRASH\n";
+
+					// WHILE (MINI != NEXTC || CURSOR->DATA > NEXTC->DATA)
+					while ((minicursor != nextc) ||
+						  	 (nextc != NULL && cursor->data() > nextc->data()))
+					{
+
+///*DEBUG*/	std::cout << "AFTER CRASH\n";
+
+///*DEBUG*/	std::cout << "WHILE MINICURSOR = " <<  minicursor->data() << "\n";
+
+
+						// IF (MINI == NEXTC) THEN
+						if (minicursor == nextc)
+						{
+
+///*DEBUG*/	std::cout << "MINICURSOR == NEXTC: " <<  minicursor->data() << "\n";
+
+							// PREVM = ARG_PTR_HEAD
+							prevm = arg_ptr_headNode;
+
+							// MINI = PREVM->LINK
+							minicursor = prevm->link();
+
+							// ENDIF
+						}
+						// IF (MINI->DATA > NEXTC->DATA) THEN
+						if (minicursor->data() > nextc->data())
+						{
+
+///*DEBUG*/	std::cout << "BEGINNING INSERTION\n";
+
+
+							// CURSOR->SET_LINK(NEXTC->LINK)
+							cursor->set_link(nextc->link());
+
+							// PREVM->SET_LINK(NEXTC)
+							prevm->set_link(nextc);
+
+							// NEXTC->SET_LINK(MINI)
+							nextc->set_link(minicursor);
+
+							// NEXTC = CURSOR->LINK
+							nextc = cursor->link();
+
+							// MINI = NEXTC
+							minicursor = nextc;
+
+///*DEBUG*/	std::cout << "COMPLETED INSERTION\n";
+///*DEBUG*/	std::cout << arg_ptr_headNode;
+
+
+						}
+							// ELSE
+						else
+						{
+
+///*DEBUG*/	std::cout << "ITERATE MINICURSOR = " <<  minicursor->data() << "\n";
+
+							// PREVM = MINI
+							prevm = minicursor;
+
+							// MINI = PREVM->LINK
+							minicursor = prevm->link();
+
+							// ENDIF
+						}
+
+///*DEBUG*/	std::cout << "ENDWHILE GONNA CRASH\n";
+
+						// ENDWHILE
+					}
+					// ENDIF
+
+///*DEBUG*/	std::cout << "ENDIF\n";
+
+				}
+				// ENDIF
+
+///*DEBUG*/	std::cout << "ENDBIGWHILE\n";
+
+			}
+			// ENDWHILE
+		}
+
+///*DEBUG*/	std::cout << "END FUNCTION\n";
+
+		// END FUNCTION
+	}
+
+
+
+	// END NAMESPACE
 }

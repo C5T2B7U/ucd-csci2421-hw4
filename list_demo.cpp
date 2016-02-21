@@ -115,13 +115,13 @@ namespace list_demo
 
 
 		// PROMPT STARTING WORD
-		std::cout << "PLEASE ENTER START WORD>  ";
+		std::cout << "\nPLEASE ENTER SEARCH START WORD>  ";
 		std::cin >> startWord;
 
-		std::cout << "PLEASE ENTER END WORD>  ";
+		std::cout << "PLEASE ENTER SEARCH END WORD>  ";
 		std::cin >> endWord;
 
-		std::cout << "GENERATING SUBLIST: " << startWord << " TO " << endWord << "\n";
+		std::cout << "\nGENERATING SUBLIST: " << startWord << " TO " << endWord << "\n";
 
 
 		// SEARCH START NODE
@@ -140,7 +140,7 @@ namespace list_demo
 		// HEAD == NULL MEANS START WORD NOT FOUND OR EMPTY LIST
 		// TAIL == NULL MEANS END WORD NOT FOUND
 		if (ptr_searchResultStartWord != NULL &&
-				isNodeBefore(ptr_searchResultStartWord, ptr_searchResultEndWord))
+				isStartWordBeforeEndWord(ptr_searchResultStartWord, ptr_searchResultEndWord))
 		{
 
 	//		list_insert(arg_ptr_sublistHeadNode, ptr_searchResultStartWord->data());
@@ -162,8 +162,12 @@ namespace list_demo
 		}
 		else
 		{
-			std::cout << "ERROR: CANNOT GENERATE SUBLIST (END WORD DOES NOT FOLLOW START WORD)\n";
+			std::cout << "ERROR: CANNOT GENERATE SUBLIST (END WORD NOT FOUND AFTER START WORD)\n";
 		}
+
+
+
+
 
 
 	}
