@@ -295,10 +295,10 @@ namespace main_savitch_5
 
 
 		// DECLARATIONS
-		// NODE POINTER CURSOR
-		// NODE POINTER NEXTC
-		// NODE POINTER MINICURSOR
-		// NODE POINTER PREVM
+		// NODE POINTER CURSOR = OUTER LOOP CURSOR
+		// NODE POINTER NEXTC = NODE AFTER CURSOR
+		// NODE POINTER MINICURSOR = INNER LOOP CURSOR
+		// NODE POINTER PREVM = NODE BEFORE MINICURSOR
 		node* cursor = NULL;
 		node* nextc = NULL;
 		node* minicursor = NULL;
@@ -316,8 +316,6 @@ namespace main_savitch_5
 		while (nextc != NULL)
 		{
 
-///*DEBUG*/	std::cout << arg_ptr_headNode;
-
 			// CURSOR = NEXTC
 			cursor = nextc;
 
@@ -328,45 +326,31 @@ namespace main_savitch_5
 			if (nextc != NULL)
 			{
 
-///*DEBUG*/	std::cout << "NEXTC NOT NULL\n";
-
 				// IF (CURSOR->DATA > NEXTC->DATA) THEN
 				if (cursor->data() > nextc->data())
 				{
 
-///*DEBUG*/	std::cout << cursor->data() << " > " << nextc->data() << arg_ptr_headNode;
-
-
 					// PREVM = ARG_PTR_HEAD
 					prevm = arg_ptr_headNode;
-
-///*DEBUG*/	std::cout << "AFTER CRASH\n";
-///*DEBUG*/	std::cout << "PREVM LINK = " <<  prevm->link()->data() << "\n";
 
 					// MINI = PREVM->LINK
 					minicursor = prevm->link();
 
-///*DEBUG*/	std::cout << "PREVM LINK = " <<  prevm->link()->data() << "\n";
-///*DEBUG*/	std::cout << "MINICURSOR = " <<  minicursor->data() << "\n";
 
-///*DEBUG*/	std::cout << "BEFORE CRASH\n";
-
+					// WARNING: NEVER DEREFERENCE THE NULL POINTER!!
 					// WHILE (MINI != NEXTC || CURSOR->DATA > NEXTC->DATA)
+					// NOTE: SOMETIMES MINI = NEXTC AND NEXTC->DATA < CURSOR->DATA
 					while ((minicursor != nextc) ||
 						  	 (nextc != NULL && cursor->data() > nextc->data()))
 					{
 
 ///*DEBUG*/	std::cout << "AFTER CRASH\n";
 
-///*DEBUG*/	std::cout << "WHILE MINICURSOR = " <<  minicursor->data() << "\n";
-
-
 						// IF (MINI == NEXTC) THEN
+						// NOTE: THIS PREVENTS NEXTC FROM GETTING SKIPPED ON
+						// NEXTC->DATA < CURSOR->DATA STILL AFTER INSERTION
 						if (minicursor == nextc)
 						{
-
-///*DEBUG*/	std::cout << "MINICURSOR == NEXTC: " <<  minicursor->data() << "\n";
-
 							// PREVM = ARG_PTR_HEAD
 							prevm = arg_ptr_headNode;
 
@@ -375,12 +359,9 @@ namespace main_savitch_5
 
 							// ENDIF
 						}
-						// IF (MINI->DATA > NEXTC->DATA) THEN
+						// IF (MINI->DATA > NEXTC->DATA) THEN DO INSERTION
 						if (minicursor->data() > nextc->data())
 						{
-
-///*DEBUG*/	std::cout << "BEGINNING INSERTION\n";
-
 
 							// CURSOR->SET_LINK(NEXTC->LINK)
 							cursor->set_link(nextc->link());
@@ -397,17 +378,10 @@ namespace main_savitch_5
 							// MINI = NEXTC
 							minicursor = nextc;
 
-///*DEBUG*/	std::cout << "COMPLETED INSERTION\n";
-///*DEBUG*/	std::cout << arg_ptr_headNode;
-
-
 						}
-							// ELSE
+						// ELSE ADVANCE MINI
 						else
 						{
-
-///*DEBUG*/	std::cout << "ITERATE MINICURSOR = " <<  minicursor->data() << "\n";
-
 							// PREVM = MINI
 							prevm = minicursor;
 
@@ -422,20 +396,11 @@ namespace main_savitch_5
 						// ENDWHILE
 					}
 					// ENDIF
-
-///*DEBUG*/	std::cout << "ENDIF\n";
-
 				}
 				// ENDIF
-
-///*DEBUG*/	std::cout << "ENDBIGWHILE\n";
-
 			}
 			// ENDWHILE
 		}
-
-///*DEBUG*/	std::cout << "END FUNCTION\n";
-
 		// END FUNCTION
 	}
 

@@ -130,28 +130,31 @@ int main()
 		ptr_headNode = new node();
 		ptr_sublistHeadNode = new node();
 
+
 /*DEBUG*/	std::cout << "\nPROCESSING FILE NOW: \n";
+
 
 		processFile(inputFile, ptr_headNode, ptr_tailNode);
 
+
 /*DEBUG*/ 	std::cout << ptr_headNode;
-
-
 /*DEBUG*/	std::cout << "\nFILE PROCESSING COMPLETE. \n";
 
 
 		generateSublist(ptr_headNode, ptr_tailNode,
 						ptr_sublistHeadNode, ptr_sublistTailNode);
 
+
 /*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
+/*DEBUG*/	std::cout << "\nSORTING SUBLIST NOW: \n";
+
 
 		list_sort(ptr_sublistHeadNode);
 
-/*DEBUG*/	std::cout << "\nSORTING SUBLIST NOW: \n";
 
 /*DEBUG*/ 	std::cout << ptr_sublistHeadNode;
-
 /*DEBUG*/	std::cout << "\nTASK COMPLETE.\n";
+
 
 		// CLOSE INPUT FILE
 		inputFile.close();
@@ -160,14 +163,10 @@ int main()
 
 		// DEALLOCATION
 		list_clear(ptr_headNode);
-		// TAIL NODE WAS JUST DELETED, DISREGARD DELETE TAIL NODE
-		//	delete ptr_tailNode;
 		delete ptr_headNode;
 
 		list_clear(ptr_sublistHeadNode);
 		delete ptr_sublistHeadNode;
-
-
 
 	}
 	// ELSE
@@ -176,20 +175,13 @@ int main()
 		// CLOSE INPUT FILE
 		inputFile.close();
 
-		// DEALLOCATION
-//		list_clear(ptr_headNode);
-//		delete ptr_headNode;
-//
-//		list_clear(ptr_sublistHeadNode);
-//	delete ptr_sublistHeadNode;
-
-
 		// RETURN ERROR
 		std::cout << "[FATAL ERROR: 13 (UNABLE TO OPEN INPUT FILE)]\n";
 		return 13;
 	}
 
 ///*DEBUG*/	std::cout << "[RETURNING NORMAL]\n";
+
 	// RETURN NORMAL
 	return 0;
 }
