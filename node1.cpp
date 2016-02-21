@@ -259,7 +259,6 @@ namespace main_savitch_5
 		// DECLARATIONS
 			// NODE POINTER CURSOR
 				// NODE POINTER NEXTC
-				// NODE POINTER PREVC
 			// NODE POINTER MINICURSOR
 				// NODE POINTER PREVM
 
@@ -339,7 +338,7 @@ namespace main_savitch_5
 
 					// WARNING: NEVER DEREFERENCE THE NULL POINTER!!
 					// WHILE (MINI != NEXTC || CURSOR->DATA > NEXTC->DATA)
-					// NOTE: SOMETIMES MINI = NEXTC AND NEXTC->DATA < CURSOR->DATA
+					// NOTE: SOMETIMES MINI == NEXTC AND NEXTC->DATA < CURSOR->DATA
 					while ((minicursor != nextc) ||
 						  	 (nextc != NULL && cursor->data() > nextc->data()))
 					{
