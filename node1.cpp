@@ -223,6 +223,9 @@ namespace main_savitch_5
 
 	bool isStartWordBeforeEndWord(const node *searchResultStartWord, const node *searchResultEndWord)
 	{
+
+		// USE MODIFIED GENERIC FUNCTION
+
 		const node* cursor;
 
 		if (searchResultEndWord != NULL)
